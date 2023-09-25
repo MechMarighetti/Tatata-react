@@ -1,0 +1,24 @@
+.selected__btn {
+    display: flex;
+    justify-content: flex-start;
+    padding: 8px 32px 16px;
+    gap: 16px;
+}
+.btn__all {
+    border-style: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+}
+.btn__all:hover {
+    filter: brightness(0.9);
+}
+.btn__all--complete {
+    background-color: lightgreen;
+}
+.btn__all--delete {
+    background-color: lightcoral;
+}

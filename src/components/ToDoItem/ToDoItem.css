@@ -1,0 +1,59 @@
+.list__item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    border-radius: 6px;
+    list-style: none;
+    padding: 2px 4px;
+    color: #3386DA;
+}
+.item__checkbox {
+    appearance: none;
+    border: 2px solid black;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    transition: background-color 0.1s ease-in-out;
+}
+.item__checkbox:checked {
+    border: 2px solid #3386DA;
+    background-color: #3386DA;
+}
+.item__text {
+    font-size: 18px;
+}
+.btn__section {
+    display: flex;
+    gap: 8px;
+}
+.item__btn {
+    line-height: 0;
+    border-style: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.item__btn:hover {
+    filter: brightness(0.9);
+}
+.item__btn--complete {
+    background-color: lightgreen;
+}
+.item__btn--edit {
+    background-color: #3386DA;
+    transform: rotate(90deg);
+}
+.item__btn--delete {
+    background-color: lightcoral;
+}
+.completed {
+    text-decoration: line-through 2px;
+}

@@ -1,0 +1,6 @@
+.todoApp {
+    border-radius: 16px;
+    background: linear-gradient(to right, #D1E4F4, #CAEFF9);
+    display: flex;
+    flex-direction: column;
+}

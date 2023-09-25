@@ -1,0 +1,31 @@
+.form {
+    padding: 16px 32px 8px;
+    display: flex;
+    justify-content: center;
+}
+.form__input {
+    width: 100%;
+    border: 4px solid #3386DA;
+    border-right: 0;
+    border-radius: 6px 0 0 6px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    padding: 8px 12px;
+}
+.form__input:focus {
+    outline: none;
+}
+.form__btn {
+    border-radius: 0 6px 6px 0;
+    background-color: #3386DA;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 0 12px 0;
+}
+.form__btn:hover {
+    filter: brightness(0.8);
+}
