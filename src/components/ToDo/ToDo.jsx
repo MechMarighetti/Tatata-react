@@ -20,6 +20,11 @@ const ToDo = () => {
     const deleteTask = (newTasks) => {
         setTasks(newTasks);
     };
+
+    // Funcion para completar una tarea
+    const completeTask = (newTasks) => {
+        setTasks(newTasks);
+    };
     
 /* 
     // Funcion para editar una tarea
@@ -72,7 +77,7 @@ const ToDo = () => {
             <ToDoTitle>To Do List - Tarea Grupal #1</ToDoTitle>
             <ToDoForm  onSubmitted={(newTask) => addTask(newTask)}/>
             <ToDoList>
-                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} /* isChecked={task.isChecked} */ isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} /* handleEdit={handleEdit} handleCheckbox={handleCheckbox} */ />)}
+                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} /* isChecked={task.isChecked} */ isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} onComplete={(data) => completeTask(data)} /* handleEdit={handleEdit} handleCheckbox={handleCheckbox} */ />)}
             </ToDoList>
             <ToDoButtons /* deleteSelection={deleteSelection} completeSelection={completeSelection} *//>
         </div>
