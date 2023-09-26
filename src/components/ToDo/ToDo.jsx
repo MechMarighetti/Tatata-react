@@ -7,21 +7,21 @@ import { ToDoButtons } from '../ToDoButtons/ToDoButtons';
 import './Todo.css'
 
 const ToDo = () => {
-    // Estados
     const [tasks, setTasks] = useState([]);
-    const addTask = (form) => {
-        setTasks([...tasks, form]);
-    }
-/* 
+
+    const addTask = (newTask) => {
+        // Comprobando si la nueva tarea ya esta incluida en la lista de tareas (igualando ambos string a lower case y eliminando todos los espacios)
+        const hasTask = tasks.find(task => task.title.toLowerCase().replace(/ /g, "") === newTask.title.toLowerCase().replace(/ /g, ""));
+        // Si la nueva tarea esta repetida enviamos una alerta (cambiar a un mensaje personalizado); sino, se encarga de actualizar la lista con la nueva tarea
+        hasTask ? alert("Esta repetida") : setTasks([...tasks, newTask]);
+    };
     
     // Funcion para eliminar una tarea
-    const handleDelete = (param) => {
-        const itemIndex = tasks.findIndex(task => task.id == param);
-        const newTasks = [...tasks];
-        newTasks.splice(itemIndex, 1);
+    const deleteTask = (newTasks) => {
         setTasks(newTasks);
     };
     
+/* 
     // Funcion para editar una tarea
     const handleEdit = (param) => {
         // Ingresando el nuevo titulo por medio de un prompt (investigar como cambiar desde el li)
@@ -70,11 +70,9 @@ const ToDo = () => {
     return (
         <div className='todoApp'>
             <ToDoTitle>To Do List - Tarea Grupal #1</ToDoTitle>
-            <ToDoForm  onSubmitted={(e) => {
-          addTask(e);
-        }}/>
+            <ToDoForm  onSubmitted={(newTask) => addTask(newTask)}/>
             <ToDoList>
-                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} /* isChecked={task.isChecked} */ isCompleted={task.isCompleted} /* handleDelete={handleDelete} handleEdit={handleEdit} handleCheckbox={handleCheckbox} *//>)}
+                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} /* isChecked={task.isChecked} */ isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} /* handleEdit={handleEdit} handleCheckbox={handleCheckbox} */ />)}
             </ToDoList>
             <ToDoButtons /* deleteSelection={deleteSelection} completeSelection={completeSelection} *//>
         </div>

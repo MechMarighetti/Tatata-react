@@ -6,27 +6,28 @@ const ToDoForm = ({onSubmitted = (form) => {} }) => {
     const [form, setForm] = useState({
         id: null,
         title: "",
-        /* isChecked: false, */
+        isChecked: false,
         isCompleted: false
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
-          ...form,
-          [name]: value,
+        ...form,
+        id: window.crypto.randomUUID(),
+        [name]: value,
         });
-      };
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Comprobando si la nueva tarea ya esta incluida en la lista de tareas (igualando ambos string a lower case y eliminando todos los espacios)
-        /* const hasTask = tasks.find(task => task.title.toLowerCase().replace(/ /g, "") == form.title.toLowerCase().replace(/ /g, ""));
-        // Si la nueva tarea esta repetida enviamos una alerta (cambiar a un mensaje personalizado); sino, se encarga de actualizar la lista con la nueva tarea
-        hasTask ? alert("Esta repetida") : setTasks([...tasks, {...form, id: window.crypto.randomUUID()}]); */
-        
         onSubmitted(form);
-
+        setForm({
+            id: null,
+            title: "",
+            isChecked: false,
+            isCompleted: false
+        });
     };
 
     return (
