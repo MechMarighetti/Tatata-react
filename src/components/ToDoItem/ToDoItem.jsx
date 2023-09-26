@@ -1,7 +1,7 @@
 import React from 'react';
 import './ToDoItem.css';
 
-const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = () => {}, onComplete = () => {}}) => {
+const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = () => {}, onComplete = () => {}, onEdit = () => {}}) => {
     const newTasks = [...tasks];
 
     // Encuentra el indice de la tarea dentro del nuevo array
@@ -22,6 +22,23 @@ const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = ()
         newTasks[index].isCompleted = true;
         onComplete(newTasks);
     };
+    
+    // Funcion para editar una tarea
+    const handleEdit = (param) => {
+        const index = findIndex(param);
+        // Investigar como cambiar desde el li
+        let newTitle = prompt('Edita la tarea desde aca');
+        // Eliminando el error que muestra la consola si se cancela el prompt -> consular sobre esto en clases
+        if(newTitle) {
+            // Comprobando si el nuevo titulo de la tarea esta repetido
+            const hasTask = newTasks.find(task => task.title.toLowerCase().replace(/ /g, "") === newTitle.toLowerCase().replace(/ /g, ""));
+            // Si el nuevo titulo de la tarea esta repetido enviamos una alerta (cambiar a un mensaje personalizado); sino, se encarga de actualizar la lista con el nuevo titulo
+            if(!hasTask) {
+                newTasks[index].title = newTitle;
+                onEdit(newTasks);
+            } else alert('tarea repetida');
+        };
+    };
 
     return (
         <div className="list__item">
@@ -29,7 +46,7 @@ const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = ()
             <li className={isCompleted ? "item__text completed" : "item__text"}>{title}</li>
             {<div className="btn__section">
                 <button className="item__btn item__btn--complete" onClick={() => handleComplete(id)}>&#10004;</button>
-                {/* <button className="item__btn item__btn--edit" onClick={() => handleEdit(title)}>&#9998;</button> */}
+                <button className="item__btn item__btn--edit" onClick={() => handleEdit(id)}>&#9998;</button>
                 <button className="item__btn item__btn--delete" onClick={() => handleDelete(id)}>&#10006;</button>
             </div>}
         </div>      
