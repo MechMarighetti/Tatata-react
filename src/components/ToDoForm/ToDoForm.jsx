@@ -14,14 +14,13 @@ const ToDoForm = ({onSubmitted = (form) => {} }) => {
         const { name, value } = e.target;
         setForm({
         ...form,
-        id: window.crypto.randomUUID(),
         [name]: value,
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmitted(form);
+        onSubmitted({...form, id: window.crypto.randomUUID()});
         setForm({
             id: null,
             title: "",
