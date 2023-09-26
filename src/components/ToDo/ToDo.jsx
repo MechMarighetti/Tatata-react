@@ -16,30 +16,27 @@ const ToDo = () => {
         hasTask ? alert("Esta repetida") : setTasks([...tasks, newTask]);
     };
     
-    // Funcion para eliminar una tarea
+    // Actualiza el estado de tareas  al eliminar una tarea
     const deleteTask = (newTasks) => {
         setTasks(newTasks);
     };
 
-    // Funcion para completar una tarea
+    // Actualiza el estado de tareas al cambiar a "completado" una tarea
     const completeTask = (newTasks) => {
         setTasks(newTasks);
     };
     
-    // Funcion para editar una tarea
+    // Actualiza el estado de tareas al editar el titulo de una tarea
     const editTask = (newTasks) => {
+        setTasks(newTasks);
+    };
+
+    // Actualiza el estado de tareas al hacer click en el checkbox de una tarea
+    const checkboxTask = (newTasks) => {
         setTasks(newTasks);
     };
     
 /* 
-    // Funcion para manejar el cambio del checkbox
-    const handleCheckbox = (param) => {
-        const taskID = tasks.findIndex(task => task.id == param);
-        const newTasks = [...tasks];
-        newTasks[taskID].isChecked ? newTasks[taskID].isChecked = false : newTasks[taskID].isChecked = true;
-        setTasks(newTasks);
-    };
-
     // Funcion para eliminar un grupo de tareas seleccionadas
     const deleteSelection = () => {
         // Filtrando tareas que tengan el checkbox desactivado
@@ -64,7 +61,7 @@ const ToDo = () => {
             <ToDoTitle>To Do List - Tarea Grupal #1</ToDoTitle>
             <ToDoForm  onSubmitted={(newTask) => addTask(newTask)}/>
             <ToDoList>
-                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} /* isChecked={task.isChecked} */ isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} onComplete={(data) => completeTask(data)} onEdit={(data) => editTask(data)} /* handleEdit={handleEdit} handleCheckbox={handleCheckbox} */ />)}
+                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} isChecked={task.isChecked} isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} onComplete={(data) => completeTask(data)} onEdit={(data) => editTask(data)} onChecked={(data) => checkboxTask(data)} />)}
             </ToDoList>
             <ToDoButtons /* deleteSelection={deleteSelection} completeSelection={completeSelection} *//>
         </div>

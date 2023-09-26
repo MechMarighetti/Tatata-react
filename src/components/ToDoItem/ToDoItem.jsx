@@ -1,7 +1,7 @@
 import React from 'react';
 import './ToDoItem.css';
 
-const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = () => {}, onComplete = () => {}, onEdit = () => {}}) => {
+const ToDoItem = ({ id, title, isChecked, isCompleted, tasks, onDelete = () => {}, onComplete = () => {}, onEdit = () => {}, onChecked = () => {}}) => {
     const newTasks = [...tasks];
 
     // Encuentra el indice de la tarea dentro del nuevo array
@@ -40,9 +40,16 @@ const ToDoItem = ({ id, title, /* isChecked */ isCompleted, tasks, onDelete = ()
         };
     };
 
+    // Funcion para manejar el cambio del checkbox
+    const handleCheckbox = (param) => {
+        const index = findIndex(param);
+        newTasks[index].isChecked ? newTasks[index].isChecked = false : newTasks[index].isChecked = true;
+        onChecked(newTasks);
+    };
+
     return (
         <div className="list__item">
-            <input className="item__checkbox" type="checkbox" name={title} id={id} /* checked={isChecked} onChange={() => handleCheckbox(id)} */ />
+            <input className="item__checkbox" type="checkbox" name={title} id={id} checked={isChecked} onChange={() => handleCheckbox(id)} />
             <li className={isCompleted ? "item__text completed" : "item__text"}>{title}</li>
             {<div className="btn__section">
                 <button className="item__btn item__btn--complete" onClick={() => handleComplete(id)}>&#10004;</button>
