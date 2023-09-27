@@ -8,55 +8,45 @@ import './Todo.css'
 
 const ToDo = () => {
     const [tasks, setTasks] = useState([]);
-
+    // Agrega una nueva tarea a la lista
     const addTask = (newTask) => {
         // Comprobando si la nueva tarea ya esta incluida en la lista de tareas (igualando ambos string a lower case y eliminando todos los espacios)
         const hasTask = tasks.find(task => task.title.toLowerCase().replace(/ /g, "") === newTask.title.toLowerCase().replace(/ /g, ""));
         // Si la nueva tarea esta repetida enviamos una alerta (cambiar a un mensaje personalizado); sino, se encarga de actualizar la lista con la nueva tarea
         hasTask ? alert("Esta repetida") : setTasks([...tasks, newTask]);
     };
-    
-    // Actualiza el estado de tareas  al eliminar una tarea
+    // Actualiza el listado de tareas  al eliminar una tarea
     const deleteTask = (newTasks) => {
         setTasks(newTasks);
     };
-
-    // Actualiza el estado de tareas al cambiar a "completado" una tarea
+    // Actualiza el listado de tareas al cambiar a "completado" una tarea
     const completeTask = (newTasks) => {
         setTasks(newTasks);
     };
-    
-    // Actualiza el estado de tareas al editar el titulo de una tarea
+    // Actualiza el listado de tareas al editar el titulo de una tarea
     const editTask = (newTasks) => {
         setTasks(newTasks);
     };
-
-    // Actualiza el estado de tareas al hacer click en el checkbox de una tarea
+    // Actualiza el listado de tareas al hacer click en el checkbox de una tarea
     const checkboxTask = (newTasks) => {
         setTasks(newTasks);
     };
-    
-/* 
-    // Funcion para actualizar a completada un grupo de tareas
-    const completeSelection = () => {
-        const newTasks = [...tasks];
-        // Filtro tareas seleccionadas
-        const tasksSelected = tasks.filter(task => task.isChecked === true);
-        // Hago un map para conseguir el id de cada tarea seleccionada
-        const tasksID = tasksSelected.map(task => newTasks.indexOf(task));
-        // Cambio a "true" la propiedad isCompleted de las tareas seleccionadas en la copia de la lista de tareas
-        tasksID.forEach(id => newTasks[id].isCompleted = true);
+    // Actualiza el listado de tareas cambiando a "completadas" un grupo de tareas seleccionadas
+    const completeSelection = (newTask) => {
+        setTasks(newTask);
+    };
+    // Actualiza el listado de tareas eliminando un grupo de tareas seleccionadas
+    const deleteSelection = (newTasks) => {
         setTasks(newTasks);
-    }; */
-
+    };
     return (
         <div className='todoApp'>
             <ToDoTitle>To Do List - Tarea Grupal #1</ToDoTitle>
             <ToDoForm  onSubmitted={(newTask) => addTask(newTask)}/>
             <ToDoList>
-                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} isChecked={task.isChecked} isCompleted={task.isCompleted} tasks={tasks} onDelete={(data) => deleteTask(data)} onComplete={(data) => completeTask(data)} onEdit={(data) => editTask(data)} onChecked={(data) => checkboxTask(data)} />)}
+                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} isChecked={task.isChecked} isCompleted={task.isCompleted} tasks={tasks} onChecked={(data) => checkboxTask(data)} onCompleted={(data) => completeTask(data)} onEdited={(data) => editTask(data)} onDeleted={(data) => deleteTask(data)} />)}
             </ToDoList>
-            <ToDoButtons /* deleteSelection={deleteSelection} completeSelection={completeSelection} *//>
+            <ToDoButtons tasks={tasks} onCompleted={(data) => completeSelection(data)} onDeleted={(data) => deleteSelection(data)} />
         </div>
     )
 };

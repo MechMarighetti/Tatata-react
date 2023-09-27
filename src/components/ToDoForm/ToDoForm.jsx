@@ -9,7 +9,6 @@ const ToDoForm = ({onSubmitted = (form) => {} }) => {
         isChecked: false,
         isCompleted: false
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -17,11 +16,10 @@ const ToDoForm = ({onSubmitted = (form) => {} }) => {
             [name]: value
         });
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         taskRef.current.id = window.crypto.randomUUID();
-        taskRef.current.title = form.title;
+        form.title && (taskRef.current.title = form.title);
         onSubmitted(taskRef.current);
         setForm({});
         taskRef.current = {
@@ -31,7 +29,6 @@ const ToDoForm = ({onSubmitted = (form) => {} }) => {
             isCompleted: false
         };
     };
-
     return (
         <section>
             <form className="form" onSubmit={(e) => handleSubmit(e)}>
