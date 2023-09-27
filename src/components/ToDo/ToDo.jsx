@@ -37,13 +37,6 @@ const ToDo = () => {
     };
     
 /* 
-    // Funcion para eliminar un grupo de tareas seleccionadas
-    const deleteSelection = () => {
-        // Filtrando tareas que tengan el checkbox desactivado
-        const remainingTasks = tasks.filter(task => task.isChecked == false);
-        setTasks(remainingTasks);
-    };
-
     // Funcion para actualizar a completada un grupo de tareas
     const completeSelection = () => {
         const newTasks = [...tasks];
