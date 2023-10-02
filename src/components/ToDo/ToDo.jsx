@@ -43,9 +43,12 @@ const ToDo = () => {
         <div className='todoApp'>
             <ToDoTitle>To Do List - Tarea Grupal #1</ToDoTitle>
             <ToDoForm  onSubmitted={(newTask) => addTask(newTask)}/>
-            <ToDoList>
-                {tasks.map(task => <ToDoItem key={task.id} id={task.id} title={task.title} isChecked={task.isChecked} isCompleted={task.isCompleted} tasks={tasks} onChecked={(data) => checkboxTask(data)} onCompleted={(data) => completeTask(data)} onEdited={(data) => editTask(data)} onDeleted={(data) => deleteTask(data)} />)}
-            </ToDoList>
+            <ToDoList
+                tasks={tasks}
+                renderTask={(task) => (
+                    <ToDoItem key={task.id} id={task.id} title={task.title} isChecked={task.isChecked} isCompleted={task.isCompleted} tasks={tasks} onChecked={(data) => checkboxTask(data)} onCompleted={(data) => completeTask(data)} onEdited={(data) => editTask(data)} onDeleted={(data) => deleteTask(data)} />
+                )}
+            />
             <ToDoButtons tasks={tasks} onCompleted={(data) => completeSelection(data)} onDeleted={(data) => deleteSelection(data)} />
         </div>
     )

@@ -3,25 +3,25 @@ import './ToDoItem.css';
 
 const ToDoItem = ({ id, title, isChecked, isCompleted, tasks, onChecked = (data) => {}, onCompleted = (data) => {}, onEdited = (data) => {}, onDeleted = (data) => {}}) => {
     const [checkbox, setCheckbox] = useState(isChecked);
-    const newTasks = [...tasks];
+    const newTasks = structuredClone(tasks);
     // Encuentra el indice de la tarea dentro del nuevo array
-    const findIndex = (param) => newTasks.findIndex(task => task.id == param);
+    const taskIndex = (param) => newTasks.findIndex(task => task.id == param);
     // Funcion para manejar el cambio del checkbox
     const handleCheckbox = (param) => {
         checkbox ? setCheckbox(false) : setCheckbox(true);
-        const index = findIndex(param);
+        const index = taskIndex(param);
         newTasks[index].isChecked ? newTasks[index].isChecked = false : newTasks[index].isChecked = true;
         onChecked(newTasks);
     };
     // Devuelve un array con la propiedad "isCompleted" modificada, donde se dio click
     const handleComplete = (param) => {
-        const index = findIndex(param);
+        const index = taskIndex(param);
         newTasks[index].isCompleted = true;
         onCompleted(newTasks);
     };
     // Edita el titulo de la tarea donde se dio click
     const handleEdit = (param) => {
-        const index = findIndex(param);
+        const index = taskIndex(param);
         // Investigar como cambiar desde el li
         let newTitle = prompt('Edita la tarea desde aca');
         // Eliminando el error que muestra la consola si se cancela el prompt -> consular sobre esto en clases
@@ -37,9 +37,8 @@ const ToDoItem = ({ id, title, isChecked, isCompleted, tasks, onChecked = (data)
     };
     // Devuelve un array eliminando el elemento donde se hace el click
     const handleDelete = (param) => {
-        const index = findIndex(param);
-        newTasks.splice(index, 1);
-        onDeleted(newTasks);
+        const remainingTasks = newTasks.filter(task => task.id !== param);
+        onDeleted(remainingTasks);
     };
     return (
         <div className="list__item">

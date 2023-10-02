@@ -1,10 +1,12 @@
 import React from 'react';
 import './ToDoList.css';
 
-const ToDoList = ({children}) => {
+const ToDoList = ({/* children */ tasks, renderTask = () => {}}) => {
     return (
         <section>
-            <ul className='list'>{children}</ul>
+            <ul className='list'>
+                {tasks.map(task => renderTask(task))}
+            </ul>
         </section>
     )
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import './ToDoButtons.css'
 
 const ToDoButtons = ({ tasks, onCompleted = (data) => {}, onDeleted = (data) => {}, completeSelection }) => {
-    const newTasks =[...tasks];
+    const newTasks = structuredClone(tasks);
     // Funcion para actualizar a completada un grupo de tareas
     const handleComplete = () => {
         // Guardando las tareas seleccionadas
@@ -16,7 +16,7 @@ const ToDoButtons = ({ tasks, onCompleted = (data) => {}, onDeleted = (data) => 
     // Funcion para eliminar un grupo de tareas seleccionadas
     const handleDelete = () => {
         // Filtrando tareas que tengan el checkbox desactivado
-        const remainingTasks = newTasks.filter(task => task.isChecked == false);
+        const remainingTasks = newTasks.filter(task => task.isChecked === false);
         onDeleted(remainingTasks);
     };
     return (
